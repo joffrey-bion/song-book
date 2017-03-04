@@ -1,4 +1,5 @@
 # An Ink Drop For a Song
+[![Build Status](https://travis-ci.org/joffrey-bion/song-book.svg?branch=master)](https://travis-ci.org/joffrey-bion/song-book)
 
 This is a LaTeX book gathering the songs I like to play.
 
