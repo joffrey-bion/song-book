@@ -18,15 +18,15 @@
 		\ifempty{#5}{}{\\ \originalArtist{#5}}
 	}
 	\songTitle{#2}
-	\index{\defaut{#1}{#2}@ #2}          % index the title
-	\index{\defaut{#3}{#4}@ \textbf{#4}} % index the artist
-	\index{\defaut{#6}{#5}@ \textbf{#5}} % index the original artist
+	\index{\defaut{#1}{#2}@ #2}          % indexes the title
+	\index{\defaut{#3}{#4}@ \textbf{#4}} % indexes the artist
+	\index{\defaut{#6}{#5}@ \textbf{#5}} % indexes the original artist
 	\begin{center}
 }{%
 	\end{center}
 }
 
-% Paratex environment
+% Paratext environment
 \newenvironment{Paratext}{
 	\begin{minipage}{\textwidth}
 		\begin{it}
@@ -36,7 +36,7 @@
 	\vspace{0.2cm}
 }
 
-% Grilles d'accords
+% Chords grids
 \newenvironment{Chords}[1][]{
 	\begin{center}
 	\ifempty{#1}{}{#1\\\vspace{0.2cm}}
@@ -89,7 +89,7 @@
 \newcommand*{\backup}[1]{\emph{(#1)}}
 \newcommand*{\rejet}[1]{\\ {\raggedleft[#1\par}}
 
-% Chords grids macros (a utiliser dans l'ordre)
+% Chords grids macros (use in this order)
 \newcommand{\diese}{$^\sharp$}
 \newcommand{\bemol}{$^\flat$}
 \newcommand{\mineur}{m}
@@ -105,7 +105,7 @@
 \newcommand*{\add}[1]{add{#1}}
 \newcommand{\puissance}{5}                    % 1 5
 \newcommand{\diminue}{\emph{dim}}             % 1 3m 5b 6
-\newcommand{\demidim}{\mineur\sept\quintedim} % 1 3m 5b 7m note aussi $\varnothing$
+\newcommand{\demidim}{\mineur\sept\quintedim} % 1 3m 5b 7m (we could use $\varnothing$)
 
 \newcommand{\gridGroupTitle}[1]{\textsc{#1}}
 \newcommand{\gridGroupNormal}{\gridGroupTitle{Normal}}

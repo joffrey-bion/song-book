@@ -1,76 +1,74 @@
 \documentclass[a4paper,11pt,french]{article}
 
-% --- Packages generaux --------------------------------------------------------
+% --- General packages ---------------------------------------------------------
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
 \usepackage{graphicx}
-\usepackage{gchords}
 
-% --- Package specifiques ------------------------------------------------------
+% --- Specific packages --------------------------------------------------------
 
-\usepackage{amsmath,amssymb}% pour la gestion facile des trucs orientes maths
-\usepackage{slashbox} % pour les cellules de tableaux coupees en diagonale
-\usepackage{xargs} % pour les macros x a plusieurs arguments optionnels
-\usepackage{multicol} % pour les environnement a plusieurs colonnes
-\usepackage{makeidx} % pour faire un index si besoin
-\usepackage{vmargin} % pour regler finement les marges (ne pas combiner avec fullpage)
-\usepackage{fancyhdr} % pour des en-tetes plus pousses
-\usepackage{hyperref} % pour transformer toutes les refs en liens (\ref, toc, index...)
-\usepackage{xcolor}
+\usepackage{amsmath}  % for easy management of math stuff
+\usepackage{slashbox} % for table cells cut diagonally
+\usepackage{xargs}    % for x-macros with multiple optional arguments
+\usepackage{multicol} % for multi-columns environments
+\usepackage{makeidx}  % to create the index
+\usepackage{vmargin}  % for margins fine-tuning (do not combine with fullpage)
+\usepackage{fancyhdr} % for fancier headers
+\usepackage{hyperref} % to transform refs into links (\ref, toc, index...)
+\usepackage{xcolor}   % for color management
+\usepackage{gchords}  % for nice chord diagrams
 
-% --- Mise en forme ------------------------------------------------------------
+% --- Page settings ------------------------------------------------------------
 
 \setlength{\parindent}{0mm}
 
 \setmarginsrb{15mm}{9mm}{15mm}{10mm}{26pt}{8mm}{12pt}{11mm}
-% marges gauche, haut, droite, bas
-% hauteur de l'entête
-% distance entre l'entête et le texte
-% hauteur du pied de page
-% distance entre le texte et le pied de page
+% Arguments:
+% margins left, up, right, down
+% header height
+% distance between header and text
+% footer height
+% distance between text and footer
 
-\renewcommand\headrulewidth{0pt} % supprime la ligne sous le header
+\renewcommand\headrulewidth{0pt} % removes the line below the header
 \pagestyle{fancy}
 
-% --- Macros et environnements specifiques -------------------------------------
+% --- Specific macros and environments -----------------------------------------
 
 \input{songs-commands.tex}
 \newcommand{\todo}{}
 
-% --- Mots mal coupes ----------------------------------------------------------
+% --- Configuration ------------------------------------------------------------
 
-\hyphenation{} % separer les syllabes par des tirets
+\makeindex % creates the index
+\hyphenation{} % declares wrongly hyphened words with dashes at the proper position
 
-% --- Elements de la page de titre ---------------------------------------------
+% --- Title page elements ------------------------------------------------------
 
-\newcommand*{\HRule}{\rule{\linewidth}{0.4mm}}  % trait horizontal epais
-\newcommand*{\auteur}[2]{\large #1~\textsc{#2}} % mise en forme du nom d'auteur
+\newcommand*{\HRule}{\rule{\linewidth}{0.4mm}}  % thick horizontal lines
+\newcommand*{\auteur}[2]{\large #1~\textsc{#2}} % styles the author's first and last name
 \newcommand{\pretitre}{Lyrics \& Chords}
 \newcommand{\grostitre}{An Ink Drop For A Song} 
 \newcommand{\auteurs}{\auteur{Joffrey}{Bion}}
-\newcommand{\madate}{\the\year} % \today pour mettre la date a la compilation
-
-% --- Si on veut un index ------------------------------------------------------
-
-\makeindex
+\newcommand{\madate}{\the\year} % \today to put the compilation date
 
 % ==============================================================================
 \begin{document}
 % ==============================================================================
 
-% --- Page de titre personnalisee ----------------------------------------------
+% --- Custom front page --------------------------------------------------------
 \begin{titlepage}
   \begin{center}
     ~
     \vfill
-    {\LARGE\pretitre\\}           % pre-titre
+    {\LARGE\pretitre\\}           % pre-title
     \vspace{2cm}
     \HRule \\[0.4cm]
-    {\Huge\bf\grostitre\\[0.4cm]} % gros titre
+    {\Huge\bf\grostitre\\[0.4cm]} % big title
     \HRule \\[0.4cm]
     \vspace{2cm}
-    \auteurs\\                    % auteur(s)
+    \auteurs\\                    % author(s)
     \vfill
     \vfill
     {\large\madate}               % date
@@ -79,11 +77,15 @@
 
 % ==============================================================================
 
-% CONVENTIONS POUR CE DOCUMENT
+% CONVENTIONS
 
-% Titres : 
-%    Premiere lettre du titre en majuscule
-%    Premiere lettre de chaque mot en majuscule (sauf le, la, de, des, the, of...)
+% Titles :
+%    Capital first letter
+%    Capitalize each word's first letter (except the, of, le, la, de, des...)
+
+% Ordering:
+%    Sorted by artist name (If the artist has first and last name, first name is used first)
+%    Sorted by song title within the same artist
 
 % ==============================================================================
 
