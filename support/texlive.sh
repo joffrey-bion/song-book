@@ -25,9 +25,13 @@ fi
 # makeidx - latex
 # multicol - tools
 # slashbox - NOT IN REPO
+# scalefnt - carlisle
 
 tlmgr install latex tools babel babel-french graphics
 tlmgr install amsmath xargs vmargin fancyhdr hyperref xcolor gchords
+
+# other required transitive dependencies that somehow were not fetched
+tlmgr install carlisle url
 
 # Keep no backups (not required, simply makes cache bigger)
 tlmgr option -- autobackup 0
