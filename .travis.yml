@@ -2,6 +2,12 @@ sudo: true
 
 before_install:
 - source ./support/texlive.sh
+- tlmgr install scalefnt
+- tlmgr install graphicx
+- tlmgr install gchords
+- tlmgr install slashbox
+- tlmgr install texliveonfly
+- texliveonfly songs.tex
 
 cache:
  directories:
