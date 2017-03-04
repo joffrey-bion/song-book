@@ -1,0 +1,18 @@
+sudo: true
+
+before_install:
+- sudo apt-get -qq update
+- sudo apt-get install --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended dvipng
+
+script:
+- mkdir _build
+- pdflatex -output-directory _build songs.tex
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Vwi/OQCRY5VV4NWfcycAaYTKwTwkyKRM0HELwh8Yw38XbSZhM7bFdKjnVflGlLF908yvelmLR2mC+raGaPKSYnuv587yN2h792AeHu4YZ7EIa/9GwlnVik96ffWaj3BBkiCyok+OaoFBtgwxdKBNSMY26R+VD9nbo3FGa6IfoyYq6MwQhefOOczcQcSmG35STdluQk+GDdEVUuTt9js6GQCp3shitip7+y8VS2Wh+hW4hDs+atSr/EuaPgXUi2UsQInqmMveU2Zz8mhx3tEI9SB7XuX/b4BNaBr+FPJ0EAiitYiZVqI0GewuNBvtc5wFcx3BcFSwRXZaaPg5RGPnuerN+CfceugHnAI9ZHrB7nJVWZvrX3gbVLbD68pGB1mi8xlUgHEqKYXk5/MEIDI31wlinNpDERRAWRrfHVxgY+sA9/AHC0cfRA6ViJjlviZc0T1113bLgTFHWiQzBZ5OJ3q+YCGYYfp3re2FuiL7sSCbFZG3SNQrQ7qEomRF1HivTNwBUyX/fMuWW9njipK/Uslp9UbZrYEo3Dj5cyuKPyQrBVm2Ef2T+EQoPK/zDVj/y26TFlsCDqMWaS4VyoYue8gCiMFyGoelRD28J4OL0jPwMWXoIC9jp/POi5SqomDwUyRyBYDgh0wFW/Of9X7TcZE3ZQljpsenCqIjcRar510=
+  file: _build/songs.pdf
+  skip_cleanup: true
+  on:
+    tags: true
