@@ -1,0 +1,119 @@
+% For easy management of optional arguments
+% usage: \ifempty{test}{value test is empty}{value otherwise}
+\newcommand{\ifempty}[3]{\ifx#1\\\\#2\else#3\fi} 
+% usage: \defaut{val}{default value if val is empty}
+\newcommand{\defaut}[2]{\ifx#1\\\\#2\else#1\fi}
+
+% Song elements
+\newcommand*{\songTitle}[1]{\begin{center} \textbf{\Huge #1} \end{center}}
+\newcommand*{\artist}[1]{\textsc{\large #1}}
+\newcommand*{\originalArtist}[1]{\small\emph{Original artist: \textsc{#1}}}
+
+% Song environment
+% usage: \begin{Song}[titleForIndex]{title}[artistForIndex]{artist}[originalArtist][originalArtistForIndex]
+\newenvironmentx{Song}[6][1,3,5,6]{%
+	\newpage
+	\fancyhead[R]{
+		\artist{#4}
+		\ifempty{#5}{}{\\ \originalArtist{#5}}
+	}
+	\songTitle{#2}
+	\index{\defaut{#1}{#2}@ #2}          % index the title
+	\index{\defaut{#3}{#4}@ \textbf{#4}} % index the artist
+	\index{\defaut{#6}{#5}@ \textbf{#5}} % index the original artist
+	\begin{center}
+}{%
+	\end{center}
+}
+
+% Paratex environment
+\newenvironment{Paratext}{
+	\begin{minipage}{\textwidth}
+		\begin{it}
+}{%
+		\end{it}
+	\end{minipage}
+	\vspace{0.2cm}
+}
+
+% Grilles d'accords
+\newenvironment{Chords}[1][]{
+	\begin{center}
+	\ifempty{#1}{}{#1\\\vspace{0.2cm}}
+	\begin{tabular}{|c|c|c|c|c}
+}{%
+	\end{tabular}
+	\end{center}
+}
+
+% Colors
+\definecolor{maleColor}{HTML}{271dca}
+\definecolor{femaleColor}{HTML}{d2149f}
+
+% Lyrics environments
+\newenvironment{Lyrics}   {\obeylines}{}
+\newenvironment{Verse}    {\begin{Lyrics}}{\end{Lyrics}}
+\newenvironment{PreChorus}{\begin{Lyrics}}{\end{Lyrics}}
+\newenvironment{Bridge}   {\begin{Lyrics}}{\end{Lyrics}}
+\newenvironment{Chorus}   {\begin{Lyrics}\begin{bf}}{\end{bf}\end{Lyrics}}
+
+% Colored lyrics environments
+% usage: \begin{Singer}{color}{singerName} (name not used for now)
+\newenvironment{Singer}[2]{\begin{color}{#1}}{\end{color}}
+\newenvironment{SingerMan}[1][]{\begin{Singer}{maleColor}{#1}}{\end{Singer}}
+\newenvironment{SingerWoman}[1][]{\begin{Singer}{femaleColor}{#1}}{\end{Singer}}
+
+% Inline colored lyrics
+\newcommand*{\singer}[3]{{\color{#1}#3}}
+\newcommand*{\singerMan}[2][]{\singer{maleColor}{#1}{#2}}
+\newcommand*{\singerWoman}[2][]{\singer{femaleColor}{#1}{#2}}
+
+% Space management
+\newcommand*{\espaceInterStrophe}{\vspace{0.5cm}}
+\newcommand*{\espaceInterGrille}{\vspace{0.0cm}}
+\newcommand*{\espaceTexteVersGrille}{\vspace{1cm}}
+\newcommand*{\espaceParatexteVersSimpleColonne}{\vspace{0.6cm}}
+\newcommand*{\espaceParatexteVersMultiColonnes}{}
+
+% Mid-lyrics indications
+\newcommand*{\direction}[2][]{\textbf{[\textsc{#2}\ifempty{#1}{}{ (#1)}]}}
+\newcommand*{\indication}[1]{\textbf{[#1]}}
+\newcommand*{\indicleft}[1]{{\raggedright\indication{#1}\\}}
+\newcommand*{\intro}[1][]{\direction[#1]{Intro}}
+\newcommand*{\aurefrain}[1][]{\direction[#1]{Refrain}}
+\newcommand*{\tochorus}[1][]{\direction[#1]{Chorus}}
+\newcommand*{\bis}{(\emph{bis})}
+\newcommand*{\adlib}{(\emph{ad lib\dots})}
+
+% Special lyrics text behavior
+\newcommand*{\backup}[1]{\emph{(#1)}}
+\newcommand*{\rejet}[1]{\\ {\raggedleft[#1\par}}
+
+% Chords grids macros (a utiliser dans l'ordre)
+\newcommand{\diese}{$^\sharp$}
+\newcommand{\bemol}{$^\flat$}
+\newcommand{\mineur}{m}
+\newcommand{\sept}{$^7$}
+\newcommand{\neuf}{9}
+\newcommand{\majsept}{$^{7\text{M}}$}
+\newcommand{\neufbemol}{\neuf$^{(\flat 9)}$}
+\newcommand{\neufaug}{$^{(\sharp 9)}$}
+\newcommand{\quinteaug}{$^{(\sharp 5)}$}
+\newcommand{\quintedim}{$^{(\flat 5)}$}
+\newcommand{\addtreiziemedim}{add$\flat 13$}
+\newcommand*{\sus}[1]{sus{#1}}
+\newcommand*{\add}[1]{add{#1}}
+\newcommand{\puissance}{5}                    % 1 5
+\newcommand{\diminue}{\emph{dim}}             % 1 3m 5b 6
+\newcommand{\demidim}{\mineur\sept\quintedim} % 1 3m 5b 7m note aussi $\varnothing$
+
+\newcommand{\gridGroupTitle}[1]{\textsc{#1}}
+\newcommand{\gridGroupNormal}{\gridGroupTitle{Normal}}
+\newcommand{\gridGroupCapo}[1]{\gridGroupTitle{Normal capo #1}}
+\newcommand{\gridGroupBetter}{\gridGroupTitle{Better}}
+\newcommand{\gridGroupBetterCapo}[1]{\gridGroupTitle{Better capo #1}}
+\newcommand{\gridGroupPerformer}[1]{\gridGroupTitle{#1}}
+\newcommand{\gridGroupPerformerCapo}[2]{\gridGroupTitle{#1 (Capo #2)}}
+\newcommand{\gridGroupNormalAndBetter}[1]{\gridGroupTitle{Normal (Better capo #1)}}
+\newcommand{\gridGroupCapoAndBetter}[2]{\gridGroupTitle{Normal capo #1 (Better capo #2)}}
+\newcommand{\gridGroupCapoAndBetterWithout}[1]{\gridGroupTitle{Normal capo #1 (Better without)}}
