@@ -2,11 +2,14 @@ sudo: true
 
 before_install:
 - sudo apt-get -qq update
-- sudo apt-get install --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended dvipng
+- sudo apt-get install -y --no-install-recommends texlive texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-lang-french
+- tlmgr install slashbox
+- tlmgr install texliveonfly
+- texliveonfly songs.tex
 
 script:
-- mkdir _build
-- pdflatex -output-directory _build songs.tex
+- mkdir build
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory build songs.tex
 
 deploy:
   provider: releases
