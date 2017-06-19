@@ -21,14 +21,14 @@ fi
 
 # LaTeX -> Tex Live
 # graphicx - graphics
-# amssymb - NOT IN REPO
 # makeidx - latex
 # multicol - tools
 # slashbox - NOT IN REPO
 # scalefnt - carlisle
 
 tlmgr install latex tools babel babel-french graphics
-tlmgr install amsmath xargs vmargin fancyhdr hyperref xcolor gchords
+tlmgr install xargs vmargin fancyhdr hyperref xcolor gchords
+tlmgr install diagbox
 
 # other required transitive dependencies that somehow were not fetched
 tlmgr install carlisle url
