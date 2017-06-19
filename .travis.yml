@@ -10,7 +10,7 @@ cache:
 
 script:
 - mkdir build
-- pdflatex -interaction=nonstopmode -halt-on-error -output-directory build songs.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory build src/songs.tex
 
 deploy:
   provider: releases
