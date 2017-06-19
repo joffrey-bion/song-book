@@ -6,10 +6,10 @@ before_install:
 - tlmgr install texliveonfly
 - texliveonfly --compiler=pdflatex src/songs.tex
 
-cache:
- directories:
-   - /tmp/texlive
-   - $HOME/.texlive
+#cache:
+# directories:
+#   - /tmp/texlive
+#   - $HOME/.texlive
 
 script:
 - mkdir build
