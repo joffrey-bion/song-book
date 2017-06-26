@@ -1,7 +1,7 @@
 sudo: true
 
 before_install:
-- "sudo apt-get update && sudo apt-get install --no-install-recommends texlive-full"
+- "sudo apt-get update && sudo apt-get install texlive-full"
 #- "sudo apt-get update && sudo apt-get install --no-install-recommends texlive texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended latex-xcolor dvipng"
 #- source ./support/texlive.sh
 #- tlmgr install texliveonfly
