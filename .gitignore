@@ -102,5 +102,11 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+*.aux
+*.idx
+*.log
+*.out
+*.pdf
+*.synctex.gz
 
 outputs/
