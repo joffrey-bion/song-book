@@ -1,15 +1,24 @@
 sudo: required
 services: docker
+
+before_install:
+# installs makeindex
+- sudo apt-get install texlive-binaries
+
 script:
-# We use the docker image from https://hub.docker.com/r/rekka/tectonic/
+# we use the docker image from https://hub.docker.com/r/rekka/tectonic/
 - docker pull rekka/tectonic
-- docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind rekka/tectonic tectonic -o build/ src/songs.tex
+# first run to generate index data
+- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic songs.tex
+- makeindex src/songs.idx
+# second run to generate the final PDF with the index (.idx file has to be next to the tex file)
+- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic songs.tex
 
 deploy:
   provider: releases
   api_key:
     secure: Vwi/OQCRY5VV4NWfcycAaYTKwTwkyKRM0HELwh8Yw38XbSZhM7bFdKjnVflGlLF908yvelmLR2mC+raGaPKSYnuv587yN2h792AeHu4YZ7EIa/9GwlnVik96ffWaj3BBkiCyok+OaoFBtgwxdKBNSMY26R+VD9nbo3FGa6IfoyYq6MwQhefOOczcQcSmG35STdluQk+GDdEVUuTt9js6GQCp3shitip7+y8VS2Wh+hW4hDs+atSr/EuaPgXUi2UsQInqmMveU2Zz8mhx3tEI9SB7XuX/b4BNaBr+FPJ0EAiitYiZVqI0GewuNBvtc5wFcx3BcFSwRXZaaPg5RGPnuerN+CfceugHnAI9ZHrB7nJVWZvrX3gbVLbD68pGB1mi8xlUgHEqKYXk5/MEIDI31wlinNpDERRAWRrfHVxgY+sA9/AHC0cfRA6ViJjlviZc0T1113bLgTFHWiQzBZ5OJ3q+YCGYYfp3re2FuiL7sSCbFZG3SNQrQ7qEomRF1HivTNwBUyX/fMuWW9njipK/Uslp9UbZrYEo3Dj5cyuKPyQrBVm2Ef2T+EQoPK/zDVj/y26TFlsCDqMWaS4VyoYue8gCiMFyGoelRD28J4OL0jPwMWXoIC9jp/POi5SqomDwUyRyBYDgh0wFW/Of9X7TcZE3ZQljpsenCqIjcRar510=
-  file: build/songs.pdf
+  file: src/songs.pdf
   skip_cleanup: true
   on:
     tags: true
