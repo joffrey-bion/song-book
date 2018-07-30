@@ -1,20 +1,9 @@
-sudo: true
-
-before_install:
-- "sudo apt-get update && sudo apt-get install -y --no-install-recommends texlive-full"
-#- "sudo apt-get update && sudo apt-get install --no-install-recommends texlive texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended latex-xcolor dvipng"
-#- source ./support/texlive.sh
-#- tlmgr install texliveonfly
-#- texliveonfly --compiler=pdflatex src/songs.tex
-
-#cache:
-# directories:
-#   - /tmp/texlive
-#   - $HOME/.texlive
-
+sudo: required
+services: docker
 script:
-- mkdir build
-- pdflatex -interaction=nonstopmode -halt-on-error -output-directory build src/*.tex
+# We use the docker image from https://hub.docker.com/r/rekka/tectonic/
+- docker pull rekka/tectonic
+- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic songs.tex
 
 deploy:
   provider: releases
