@@ -3,7 +3,7 @@ services: docker
 script:
 # We use the docker image from https://hub.docker.com/r/rekka/tectonic/
 - docker pull rekka/tectonic
-- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic songs.tex
+- docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind rekka/tectonic tectonic -o build/ src/songs.tex
 
 deploy:
   provider: releases
