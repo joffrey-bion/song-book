@@ -4,15 +4,16 @@ services: docker
 before_install:
 # installs makeindex
 - sudo apt-get install texlive-binaries
+- SRC_DIR=$TRAVIS_BUILD_DIR/src $TRAVIS_BUILD_DIR/src/scripts/make-songs-includes.sh
 
 script:
 # we use the docker image from https://hub.docker.com/r/rekka/tectonic/
 - docker pull rekka/tectonic
 # first run to generate index data
-- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic songs.tex
+- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic pre-build.tex
 - makeindex src/songs.idx
 # second run to generate the final PDF with the index (.idx file has to be next to the tex file)
-- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic songs.tex
+- docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic pre-build.tex
 
 deploy:
   provider: releases

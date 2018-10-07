@@ -110,3 +110,6 @@ local.properties
 *.synctex.gz
 *.ind
 *.ilg
+
+# Pre-build file
+src/pre-build.tex
