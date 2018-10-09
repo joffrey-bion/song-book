@@ -35,5 +35,5 @@ for i in $(seq 0 1 $((${#LINE_NUMBERS[@]}-1))); do
     friendly_song_title=$(friendly_name "$song_title")
     file_name="${friendly_artist}_${friendly_song_title}"
     echo $file_name
-    #sed -n "${start},${end}p" $file_path > "$SRC_DIR/songs/$file_name.tex"
+    sed -n "${start},${end}p" $file_path > "$SRC_DIR/songs/$file_name.tex"
 done
