@@ -5,10 +5,13 @@
 friendly_name () { \
 echo $1 \
 | sed -e 's/\\//g' \
- -e "s/'//g" -e "s/!//g" -e "s/\.//g" \
- -e "s/(//g" -e "s/)//g" \
- -e 'y/āáǎàâçēéěèêīíǐìîōóǒòôūúǔùǖǘǚǜûĀÁǍÀÂÇĒÉĚÈÊĪÍǏÌÎŌÓǑÒÔŪÚǓÙǕǗǙǛÛ/aaaaaceeeeeiiiiiooooouuuuuuuuuAAAAACEEEEEIIIIIOOOOOUUUUUUUUU/' \
- -e 's/[^a-zA-Z0-9_.&\+-]/-/g' \
+| sed -e "s/'//g" \
+| sed -e "s/!//g" \
+| sed -e "s/\.//g" \
+| sed -e "s/(//g" \
+| sed -e "s/)//g" \
+| sed -e 'y/āáǎàâçēéěèêīíǐìîōóǒòôūúǔùǖǘǚǜûĀÁǍÀÂÇĒÉĚÈÊĪÍǏÌÎŌÓǑÒÔŪÚǓÙǕǗǙǛÛ/aaaaaceeeeeiiiiiooooouuuuuuuuuAAAAACEEEEEIIIIIOOOOOUUUUUUUUU/' \
+| sed -e 's/[^a-zA-Z0-9_&\+-]/-/g' \
 | awk '{print tolower($0)}'; \
 }
 
