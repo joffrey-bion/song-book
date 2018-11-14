@@ -11,9 +11,11 @@ script:
 - docker pull rekka/tectonic
 # first run to generate index data
 - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic pre-build.tex
-- makeindex src/songs.idx
+- makeindex src/pre-build.idx
 # second run to generate the final PDF with the index (.idx file has to be next to the tex file)
 - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind rekka/tectonic tectonic pre-build.tex
+# rename the output file songs.pdf before upload
+- mv src/pre-build.pdf src/songs.pdf
 
 deploy:
   provider: releases
