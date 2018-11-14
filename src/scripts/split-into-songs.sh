@@ -33,7 +33,7 @@ for i in $(seq 0 1 $((${#LINE_NUMBERS[@]}-1))); do
     line=$(sed -n "$start{p;q;}" $file_path)
     line=$(echo $line | sed -e 's/\[\([^]]*\)\]//g')
     artist=$(echo $line | sed -e 's/begin{Song}{[^}]*}{\([^}]*\)}$/\1/')
-    friendly_artist=$(friendly_name "$artist")
+    friendly_artist=$(friendly_name "$artist" | sed -e 's/^the-//')
     song_title=$(echo $line | sed -e 's/begin{Song}{\([^}]*\)}{[^}]*}$/\1/')
     friendly_song_title=$(friendly_name "$song_title")
     file_name="${friendly_artist}_${friendly_song_title}"
